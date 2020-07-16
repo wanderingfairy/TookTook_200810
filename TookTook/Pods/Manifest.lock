@@ -1,0 +1,24 @@
+PODS:
+  - FLEX (4.1.1)
+  - Gedatsu (1.2.0)
+  - Tapa (0.3.0)
+
+DEPENDENCIES:
+  - FLEX
+  - Gedatsu
+  - Tapa
+
+SPEC REPOS:
+  trunk:
+    - FLEX
+    - Gedatsu
+    - Tapa
+
+SPEC CHECKSUMS:
+  FLEX: 81096107977a09836eb440173010ceeef01105d6
+  Gedatsu: 13a21a3cbf7978f9ff671eca5715b94a4309d9a8
+  Tapa: ce6cf1378422000a8fc6966362856bb1241b13c9
+
+PODFILE CHECKSUM: 6eeeca6a84e645af7c1c7c3551bf7a7d53f58863
+
+COCOAPODS: 1.8.4

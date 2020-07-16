@@ -1,0 +1,6 @@
+framework module Pods_TookTook {
+  umbrella header "Pods-TookTook-umbrella.h"
+
+  export *
+  module * { export * }
+}

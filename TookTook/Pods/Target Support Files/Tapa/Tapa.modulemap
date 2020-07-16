@@ -1,0 +1,6 @@
+framework module Tapa {
+  umbrella header "Tapa-umbrella.h"
+
+  export *
+  module * { export * }
+}
