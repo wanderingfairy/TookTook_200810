@@ -49,6 +49,12 @@
 		1532A71324BF8F3300DCD4C5 /* MapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71224BF8F3300DCD4C5 /* MapViewModelTests.swift */; };
 		1532A71524BF8F3B00DCD4C5 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71424BF8F3B00DCD4C5 /* TimerViewModelTests.swift */; };
 		1532A71724BF8F4A00DCD4C5 /* MainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71624BF8F4A00DCD4C5 /* MainServiceTests.swift */; };
+		1532A71B24C065C100DCD4C5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71A24C065C100DCD4C5 /* AppState.swift */; };
+		1532A71D24C065CA00DCD4C5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71C24C065CA00DCD4C5 /* AppError.swift */; };
+		1532A71F24C065D000DCD4C5 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71E24C065D000DCD4C5 /* AppModel.swift */; };
+		1532A72124C065D900DCD4C5 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A72024C065D900DCD4C5 /* DataModel.swift */; };
+		1532A72A24C0683000DCD4C5 /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A72924C0683000DCD4C5 /* AppModelTests.swift */; };
+		1532A72C24C0683900DCD4C5 /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A72B24C0683900DCD4C5 /* DataModelTests.swift */; };
 		976270FE85A4C46062677999 /* Pods_TookTookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */; };
 		A7E679856D33087FACE8CCE8 /* Pods_TookTook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D23E8166C1AF79D01712960 /* Pods_TookTook.framework */; };
 /* End PBXBuildFile section */
@@ -96,6 +102,12 @@
 		1532A71224BF8F3300DCD4C5 /* MapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModelTests.swift; sourceTree = "<group>"; };
 		1532A71424BF8F3B00DCD4C5 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
 		1532A71624BF8F4A00DCD4C5 /* MainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServiceTests.swift; sourceTree = "<group>"; };
+		1532A71A24C065C100DCD4C5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppState.swift; path = TookTookTests/Service/AppState.swift; sourceTree = SOURCE_ROOT; };
+		1532A71C24C065CA00DCD4C5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppError.swift; path = TookTookTests/Service/AppError.swift; sourceTree = SOURCE_ROOT; };
+		1532A71E24C065D000DCD4C5 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppModel.swift; path = TookTookTests/Service/AppModel.swift; sourceTree = SOURCE_ROOT; };
+		1532A72024C065D900DCD4C5 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataModel.swift; path = TookTookTests/Service/DataModel.swift; sourceTree = SOURCE_ROOT; };
+		1532A72924C0683000DCD4C5 /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppModelTests.swift; path = ../../../../../../../../Documents/AppModelTests.swift; sourceTree = "<group>"; };
+		1532A72B24C0683900DCD4C5 /* DataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataModelTests.swift; path = ../../../../../../../../Documents/DataModelTests.swift; sourceTree = "<group>"; };
 		1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TookTookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2E839F04F6E55A200D42AD /* Pods-TookTook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTook.release.xcconfig"; path = "Target Support Files/Pods-TookTook/Pods-TookTook.release.xcconfig"; sourceTree = "<group>"; };
 		63A92BBD24FD92EA0D328D2B /* Pods-TookTookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTookTests.debug.xcconfig"; path = "Target Support Files/Pods-TookTookTests/Pods-TookTookTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,11 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				1532A6BC24BF768B00DCD4C5 /* Utility */,
-				1532A6BB24BF768600DCD4C5 /* Model */,
-				1532A6BA24BF768200DCD4C5 /* ViewModel */,
-				1532A6B924BF767E00DCD4C5 /* View */,
-				1532A6B824BF767900DCD4C5 /* Coordinator */,
-				1532A6B724BF767300DCD4C5 /* Service */,
+				1532A72824C067B300DCD4C5 /* Cases */,
 				1532A6A624BF6F9E00DCD4C5 /* Info.plist */,
 			);
 			path = TookTookTests;
@@ -233,6 +241,8 @@
 		1532A6B524BF763800DCD4C5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1532A71924C065AE00DCD4C5 /* DataModel */,
+				1532A71824C065A300DCD4C5 /* AppModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,6 +294,8 @@
 		1532A6BB24BF768600DCD4C5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1532A72224C0676300DCD4C5 /* AppModel */,
+				1532A72324C0676B00DCD4C5 /* DataModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -329,6 +341,52 @@
 				1532A70824BF8EFE00DCD4C5 /* MainStepTests.swift */,
 			);
 			path = Step;
+			sourceTree = "<group>";
+		};
+		1532A71824C065A300DCD4C5 /* AppModel */ = {
+			isa = PBXGroup;
+			children = (
+				1532A71A24C065C100DCD4C5 /* AppState.swift */,
+				1532A71C24C065CA00DCD4C5 /* AppError.swift */,
+				1532A71E24C065D000DCD4C5 /* AppModel.swift */,
+			);
+			path = AppModel;
+			sourceTree = "<group>";
+		};
+		1532A71924C065AE00DCD4C5 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				1532A72024C065D900DCD4C5 /* DataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		1532A72224C0676300DCD4C5 /* AppModel */ = {
+			isa = PBXGroup;
+			children = (
+				1532A72924C0683000DCD4C5 /* AppModelTests.swift */,
+			);
+			path = AppModel;
+			sourceTree = "<group>";
+		};
+		1532A72324C0676B00DCD4C5 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				1532A72B24C0683900DCD4C5 /* DataModelTests.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		1532A72824C067B300DCD4C5 /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+				1532A6BB24BF768600DCD4C5 /* Model */,
+				1532A6BA24BF768200DCD4C5 /* ViewModel */,
+				1532A6B924BF767E00DCD4C5 /* View */,
+				1532A6B824BF767900DCD4C5 /* Coordinator */,
+				1532A6B724BF767300DCD4C5 /* Service */,
+			);
+			path = Cases;
 			sourceTree = "<group>";
 		};
 		95B4DC960536C975E5EA8213 /* Frameworks */ = {
@@ -555,6 +613,7 @@
 			files = (
 				1532A6CC24BF7BFA00DCD4C5 /* LoginViewController.swift in Sources */,
 				1532A6C824BF79DA00DCD4C5 /* MainViewModel.swift in Sources */,
+				1532A71D24C065CA00DCD4C5 /* AppError.swift in Sources */,
 				1532A68F24BF6F9B00DCD4C5 /* TImerViewController.swift in Sources */,
 				1532A6D424BF7ED500DCD4C5 /* TimerViewModel.swift in Sources */,
 				1532A6D024BF7C1100DCD4C5 /* TimerFlow.swift in Sources */,
@@ -562,8 +621,11 @@
 				1532A6C624BF791800DCD4C5 /* MainService.swift in Sources */,
 				1532A6C424BF78CE00DCD4C5 /* RootFlow.swift in Sources */,
 				1532A6CE24BF7C0700DCD4C5 /* MapFlow.swift in Sources */,
+				1532A71B24C065C100DCD4C5 /* AppState.swift in Sources */,
+				1532A71F24C065D000DCD4C5 /* AppModel.swift in Sources */,
 				1532A6C224BF776500DCD4C5 /* MainStep.swift in Sources */,
 				1532A69524BF6F9B00DCD4C5 /* TookTook.xcdatamodeld in Sources */,
+				1532A72124C065D900DCD4C5 /* DataModel.swift in Sources */,
 				1532A6CA24BF7BF400DCD4C5 /* MapViewController.swift in Sources */,
 				1532A6D224BF7ECC00DCD4C5 /* MapViewModel.swift in Sources */,
 			);
@@ -576,6 +638,8 @@
 				1532A70524BF8EE700DCD4C5 /* LoginViewControllerTests.swift in Sources */,
 				1532A70F24BF8F1F00DCD4C5 /* TimerFlowTests.swift in Sources */,
 				1532A71524BF8F3B00DCD4C5 /* TimerViewModelTests.swift in Sources */,
+				1532A72C24C0683900DCD4C5 /* DataModelTests.swift in Sources */,
+				1532A72A24C0683000DCD4C5 /* AppModelTests.swift in Sources */,
 				1532A6BE24BF76CE00DCD4C5 /* TimerViewControllerTests.swift in Sources */,
 				1532A71724BF8F4A00DCD4C5 /* MainServiceTests.swift in Sources */,
 				1532A70924BF8EFE00DCD4C5 /* MainStepTests.swift in Sources */,
