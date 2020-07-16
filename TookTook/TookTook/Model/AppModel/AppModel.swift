@@ -14,8 +14,13 @@ class AppModel {
   
   private(set) var appState: AppState = .notStarted
   
-  func start() {
+  func appStart() {
     appState = .inMapVC
+    dataModel.start()
+  }
+  
+  func timerVCStart() {
+    appState = .inTimerVC
   }
   
 }

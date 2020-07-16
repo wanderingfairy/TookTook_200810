@@ -56,6 +56,7 @@
 		1532A73A24C0693000DCD4C5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73724C0693000DCD4C5 /* AppState.swift */; };
 		1532A73C24C0694000DCD4C5 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73B24C0693F00DCD4C5 /* DataModel.swift */; };
 		1532A73E24C06ADE00DCD4C5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73D24C06ADE00DCD4C5 /* LoginViewModel.swift */; };
+		1532A74024C0B76000DCD4C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73F24C0B76000DCD4C5 /* ViewController.swift */; };
 		976270FE85A4C46062677999 /* Pods_TookTookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */; };
 		A7E679856D33087FACE8CCE8 /* Pods_TookTook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D23E8166C1AF79D01712960 /* Pods_TookTook.framework */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		1532A73724C0693000DCD4C5 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1532A73B24C0693F00DCD4C5 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		1532A73D24C06ADE00DCD4C5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		1532A73F24C0B76000DCD4C5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TookTookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2E839F04F6E55A200D42AD /* Pods-TookTook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTook.release.xcconfig"; path = "Target Support Files/Pods-TookTook/Pods-TookTook.release.xcconfig"; sourceTree = "<group>"; };
 		63A92BBD24FD92EA0D328D2B /* Pods-TookTookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTookTests.debug.xcconfig"; path = "Target Support Files/Pods-TookTookTests/Pods-TookTookTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				1532A6BC24BF768B00DCD4C5 /* Utility */,
 				1532A72824C067B300DCD4C5 /* Cases */,
 				1532A6A624BF6F9E00DCD4C5 /* Info.plist */,
+				1532A73F24C0B76000DCD4C5 /* ViewController.swift */,
 			);
 			path = TookTookTests;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				1532A70F24BF8F1F00DCD4C5 /* TimerFlowTests.swift in Sources */,
 				1532A71524BF8F3B00DCD4C5 /* TimerViewModelTests.swift in Sources */,
 				1532A72C24C0683900DCD4C5 /* DataModelTests.swift in Sources */,
+				1532A74024C0B76000DCD4C5 /* ViewController.swift in Sources */,
 				1532A72A24C0683000DCD4C5 /* AppModelTests.swift in Sources */,
 				1532A6BE24BF76CE00DCD4C5 /* TimerViewControllerTests.swift in Sources */,
 				1532A71724BF8F4A00DCD4C5 /* MainServiceTests.swift in Sources */,

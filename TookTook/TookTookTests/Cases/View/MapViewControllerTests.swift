@@ -7,15 +7,21 @@
 //
 
 import XCTest
+@testable import TookTook
 
 class MapViewControllerTests: XCTestCase {
+  
+  var sut: MapViewController!
 
     override func setUp() {
-      
+      super.setUp()
+      let rootTabBarController = loadRootTabBarController()
+      sut = rootTabBarController.mapController
     }
     
     override func tearDown() {
       
+      super.tearDown()
     }
 
 }

@@ -16,6 +16,7 @@ import NSObject_Rx
 import Then
 import SnapKit
 import CoreData
+import Tapa
 
 #if DEBUG
 import Gedatsu
