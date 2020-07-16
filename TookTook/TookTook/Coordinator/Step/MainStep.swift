@@ -23,5 +23,6 @@ enum MainStep: Step {
   case apiKeyIsRequired
   case apiKeyIsFilledIn
   
-  
+  // For debug
+  case check
 }

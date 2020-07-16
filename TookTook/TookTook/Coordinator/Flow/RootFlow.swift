@@ -40,7 +40,9 @@ class RootFlow: Flow {
 
 extension RootFlow {
   func tabBarInit() -> FlowContributors {
-    let mainStepper = MainViewModel()
+//    let mainStepper = MainViewModel()
+    let mapStepper = MapViewModel()
+    let timerStepper = TimerViewModel()
     
     let mapFlow = MapFlow(withService: self.services)
     let timerFlow = TimerFlow(withService: self.services)
@@ -59,9 +61,9 @@ extension RootFlow {
     
     return .multiple(flowContributors: [
       .contribute(withNextPresentable: mapFlow,
-                  withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.mapVCInitIsRequired), mainStepper])),
+                  withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.mapVCInitIsRequired), mapStepper])),
       .contribute(withNextPresentable: timerFlow,
-                  withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.timerVCInitIsRequired), mainStepper]))
+                  withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.timerVCInitIsRequired), timerStepper]))
     ])
   }
 }

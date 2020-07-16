@@ -28,6 +28,8 @@ class MapFlow: Flow {
     switch step {
     case .mapVCInitIsRequired:
       return mapVCInit()
+    case .check:
+      return mapCheck()
     default:
       return .none
     }
@@ -39,8 +41,14 @@ extension MapFlow {
     let vc = MapViewController()
     vc.title = "Map"
     vc.viewModel = MapViewModel()
-    
+    print(#function)
     self.mapNavigationController.pushViewController(vc, animated: true)
     return .one(flowContributor: .contribute(withNextPresentable: vc, withNextStepper: vc.viewModel))
+  }
+  
+  private func mapCheck() -> FlowContributors {
+    print(#function, "check")
+    
+    return .none
   }
 }

@@ -1,5 +1,5 @@
 //
-//  DataModel.swift
+//  AppError.swift
 //  TookTook
 //
 //  Created by 정의석 on 2020/07/16.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class DataModel {
-  
+enum AppError: Error {
+  case generalError, todayCountIsNil
 }

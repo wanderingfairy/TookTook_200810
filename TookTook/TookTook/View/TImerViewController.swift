@@ -10,14 +10,13 @@ import UIKit
 
 class TimerViewController: UIViewController {
   
-    var viewModel: TimerViewModel!
-
+  var viewModel: TimerViewModel!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-          view.backgroundColor = .white
-    // Do any additional setup after loading the view.
+    view.backgroundColor = .white
   }
-
-
+  
+  
 }
 

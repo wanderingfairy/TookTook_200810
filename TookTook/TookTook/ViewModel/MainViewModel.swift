@@ -15,7 +15,7 @@ import Action
 protocol ViewModel {
 }
 
-class MainViewModel: Stepper, ViewModel {
+struct MainViewModel: Stepper, ViewModel {
   let steps = PublishRelay<Step>()
   private let mainService: MainService
   private let disposeBag = DisposeBag()
@@ -28,5 +28,6 @@ class MainViewModel: Stepper, ViewModel {
 extension MainViewModel {
   public func tabBarInit() {
     self.steps.accept(MainStep.tabBarInitIsRequired)
+    //사용안되고잇는중
   }
 }

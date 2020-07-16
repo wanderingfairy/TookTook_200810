@@ -13,8 +13,15 @@ import RxFlow
 import Action
 
 
-class MapViewModel: Stepper, ViewModel {
+struct MapViewModel: Stepper, ViewModel {
   var steps = PublishRelay<Step>()
 
 
+}
+
+extension MapViewModel {
+  public func checkFunction() {
+    self.steps.accept(MainStep.check)
+    print(#function)
+  }
 }

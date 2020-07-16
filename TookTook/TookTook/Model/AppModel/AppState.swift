@@ -10,4 +10,5 @@ import Foundation
 
 public enum AppState {
   case notStarted, inMapVC, inTimerVC, inLoginVC, inActive, inBackground, inSuspended
+
 }

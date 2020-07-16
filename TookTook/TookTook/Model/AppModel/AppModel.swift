@@ -14,6 +14,8 @@ class AppModel {
   
   private(set) var appState: AppState = .notStarted
   
-  
+  func start() {
+    appState = .inMapVC
+  }
   
 }

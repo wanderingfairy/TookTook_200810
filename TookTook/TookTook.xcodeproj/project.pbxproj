@@ -49,12 +49,13 @@
 		1532A71324BF8F3300DCD4C5 /* MapViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71224BF8F3300DCD4C5 /* MapViewModelTests.swift */; };
 		1532A71524BF8F3B00DCD4C5 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71424BF8F3B00DCD4C5 /* TimerViewModelTests.swift */; };
 		1532A71724BF8F4A00DCD4C5 /* MainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71624BF8F4A00DCD4C5 /* MainServiceTests.swift */; };
-		1532A71B24C065C100DCD4C5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71A24C065C100DCD4C5 /* AppState.swift */; };
-		1532A71D24C065CA00DCD4C5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71C24C065CA00DCD4C5 /* AppError.swift */; };
-		1532A71F24C065D000DCD4C5 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A71E24C065D000DCD4C5 /* AppModel.swift */; };
-		1532A72124C065D900DCD4C5 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A72024C065D900DCD4C5 /* DataModel.swift */; };
 		1532A72A24C0683000DCD4C5 /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A72924C0683000DCD4C5 /* AppModelTests.swift */; };
 		1532A72C24C0683900DCD4C5 /* DataModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A72B24C0683900DCD4C5 /* DataModelTests.swift */; };
+		1532A73824C0693000DCD4C5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73524C0693000DCD4C5 /* AppError.swift */; };
+		1532A73924C0693000DCD4C5 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73624C0693000DCD4C5 /* AppModel.swift */; };
+		1532A73A24C0693000DCD4C5 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73724C0693000DCD4C5 /* AppState.swift */; };
+		1532A73C24C0694000DCD4C5 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73B24C0693F00DCD4C5 /* DataModel.swift */; };
+		1532A73E24C06ADE00DCD4C5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1532A73D24C06ADE00DCD4C5 /* LoginViewModel.swift */; };
 		976270FE85A4C46062677999 /* Pods_TookTookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */; };
 		A7E679856D33087FACE8CCE8 /* Pods_TookTook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D23E8166C1AF79D01712960 /* Pods_TookTook.framework */; };
 /* End PBXBuildFile section */
@@ -102,12 +103,13 @@
 		1532A71224BF8F3300DCD4C5 /* MapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModelTests.swift; sourceTree = "<group>"; };
 		1532A71424BF8F3B00DCD4C5 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
 		1532A71624BF8F4A00DCD4C5 /* MainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServiceTests.swift; sourceTree = "<group>"; };
-		1532A71A24C065C100DCD4C5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppState.swift; path = TookTookTests/Service/AppState.swift; sourceTree = SOURCE_ROOT; };
-		1532A71C24C065CA00DCD4C5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppError.swift; path = TookTookTests/Service/AppError.swift; sourceTree = SOURCE_ROOT; };
-		1532A71E24C065D000DCD4C5 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppModel.swift; path = TookTookTests/Service/AppModel.swift; sourceTree = SOURCE_ROOT; };
-		1532A72024C065D900DCD4C5 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataModel.swift; path = TookTookTests/Service/DataModel.swift; sourceTree = SOURCE_ROOT; };
 		1532A72924C0683000DCD4C5 /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppModelTests.swift; path = ../../../../../../../../Documents/AppModelTests.swift; sourceTree = "<group>"; };
 		1532A72B24C0683900DCD4C5 /* DataModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataModelTests.swift; path = ../../../../../../../../Documents/DataModelTests.swift; sourceTree = "<group>"; };
+		1532A73524C0693000DCD4C5 /* AppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		1532A73624C0693000DCD4C5 /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		1532A73724C0693000DCD4C5 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1532A73B24C0693F00DCD4C5 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		1532A73D24C06ADE00DCD4C5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TookTookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2E839F04F6E55A200D42AD /* Pods-TookTook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTook.release.xcconfig"; path = "Target Support Files/Pods-TookTook/Pods-TookTook.release.xcconfig"; sourceTree = "<group>"; };
 		63A92BBD24FD92EA0D328D2B /* Pods-TookTookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTookTests.debug.xcconfig"; path = "Target Support Files/Pods-TookTookTests/Pods-TookTookTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -221,8 +223,8 @@
 		1532A6B324BF762C00DCD4C5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1532A68E24BF6F9B00DCD4C5 /* TImerViewController.swift */,
 				1532A6C924BF7BF400DCD4C5 /* MapViewController.swift */,
+				1532A68E24BF6F9B00DCD4C5 /* TImerViewController.swift */,
 				1532A6CB24BF7BFA00DCD4C5 /* LoginViewController.swift */,
 			);
 			path = View;
@@ -234,6 +236,7 @@
 				1532A6C724BF79DA00DCD4C5 /* MainViewModel.swift */,
 				1532A6D124BF7ECC00DCD4C5 /* MapViewModel.swift */,
 				1532A6D324BF7ED500DCD4C5 /* TimerViewModel.swift */,
+				1532A73D24C06ADE00DCD4C5 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -346,9 +349,9 @@
 		1532A71824C065A300DCD4C5 /* AppModel */ = {
 			isa = PBXGroup;
 			children = (
-				1532A71A24C065C100DCD4C5 /* AppState.swift */,
-				1532A71C24C065CA00DCD4C5 /* AppError.swift */,
-				1532A71E24C065D000DCD4C5 /* AppModel.swift */,
+				1532A73724C0693000DCD4C5 /* AppState.swift */,
+				1532A73624C0693000DCD4C5 /* AppModel.swift */,
+				1532A73524C0693000DCD4C5 /* AppError.swift */,
 			);
 			path = AppModel;
 			sourceTree = "<group>";
@@ -356,7 +359,7 @@
 		1532A71924C065AE00DCD4C5 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				1532A72024C065D900DCD4C5 /* DataModel.swift */,
+				1532A73B24C0693F00DCD4C5 /* DataModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -613,19 +616,20 @@
 			files = (
 				1532A6CC24BF7BFA00DCD4C5 /* LoginViewController.swift in Sources */,
 				1532A6C824BF79DA00DCD4C5 /* MainViewModel.swift in Sources */,
-				1532A71D24C065CA00DCD4C5 /* AppError.swift in Sources */,
+				1532A73824C0693000DCD4C5 /* AppError.swift in Sources */,
 				1532A68F24BF6F9B00DCD4C5 /* TImerViewController.swift in Sources */,
 				1532A6D424BF7ED500DCD4C5 /* TimerViewModel.swift in Sources */,
 				1532A6D024BF7C1100DCD4C5 /* TimerFlow.swift in Sources */,
+				1532A73A24C0693000DCD4C5 /* AppState.swift in Sources */,
 				1532A68B24BF6F9B00DCD4C5 /* AppDelegate.swift in Sources */,
+				1532A73E24C06ADE00DCD4C5 /* LoginViewModel.swift in Sources */,
 				1532A6C624BF791800DCD4C5 /* MainService.swift in Sources */,
 				1532A6C424BF78CE00DCD4C5 /* RootFlow.swift in Sources */,
 				1532A6CE24BF7C0700DCD4C5 /* MapFlow.swift in Sources */,
-				1532A71B24C065C100DCD4C5 /* AppState.swift in Sources */,
-				1532A71F24C065D000DCD4C5 /* AppModel.swift in Sources */,
 				1532A6C224BF776500DCD4C5 /* MainStep.swift in Sources */,
+				1532A73924C0693000DCD4C5 /* AppModel.swift in Sources */,
 				1532A69524BF6F9B00DCD4C5 /* TookTook.xcdatamodeld in Sources */,
-				1532A72124C065D900DCD4C5 /* DataModel.swift in Sources */,
+				1532A73C24C0694000DCD4C5 /* DataModel.swift in Sources */,
 				1532A6CA24BF7BF400DCD4C5 /* MapViewController.swift in Sources */,
 				1532A6D224BF7ECC00DCD4C5 /* MapViewModel.swift in Sources */,
 			);

@@ -38,7 +38,7 @@ extension TimerFlow {
   private func timerVCInit() -> FlowContributors {
     let vc = TimerViewController()
     
-    vc.title = "Map"
+    vc.title = "Timer"
     vc.viewModel = TimerViewModel()
     
     self.timerNavigationController.pushViewController(vc, animated: true)

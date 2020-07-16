@@ -13,10 +13,14 @@ class MapViewController: UIViewController {
   var viewModel: MapViewModel!
   
   override func viewDidLoad() {
-    print(#function)
     super.viewDidLoad()
     view.backgroundColor = .white
-    
+
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+        viewModel.checkFunction()
   }
   
 }
