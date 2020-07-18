@@ -9,15 +9,20 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import NSObject_Rx
 
 struct DataModel {
   
   var todayCount = BehaviorSubject<Int>(value: 0)
-  var inServerCount: Int?
+  var inServerCount = BehaviorSubject<Int>(value: 0)
+  
+  var bag = DisposeBag()
   
   func start() {
-    guard let serverCount = self.inServerCount else { todayCount.onNext(0); return }
-    todayCount.onNext(serverCount)
+    inServerCount
+      .subscribe(onNext: {
+        self.todayCount.onNext($0)
+      })
+      .disposed(by: bag)
   }
-    
 }

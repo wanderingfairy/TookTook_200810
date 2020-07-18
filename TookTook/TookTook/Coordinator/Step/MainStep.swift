@@ -25,4 +25,7 @@ enum MainStep: Step {
   
   // For debug
   case check
+  
+  // For back
+  case back
 }

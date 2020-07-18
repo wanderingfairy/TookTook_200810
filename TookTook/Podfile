@@ -12,6 +12,13 @@ target 'TookTook' do
   pod 'FLEX', :configurations => ['Debug']
   pod 'Gedatsu', configuration: %w(Debug)
 
+  # For Firebase
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Core'
+  pod 'FirebaseUI'
+  pod 'GoogleSignIn'
 
 
   target 'TookTookTests' do

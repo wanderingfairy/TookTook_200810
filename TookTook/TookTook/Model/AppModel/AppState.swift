@@ -10,5 +10,9 @@ import Foundation
 
 public enum AppState {
   case notStarted, inMapVC, inTimerVC, inLoginVC, inActive, inBackground, inSuspended
+}
 
+public enum AuthState {
+  case notStarted
+  case loginRequired, userLoggedIn
 }

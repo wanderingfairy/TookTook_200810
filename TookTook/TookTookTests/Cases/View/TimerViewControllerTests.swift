@@ -32,5 +32,32 @@ class TimerViewControllerTests: XCTestCase {
     //then
     XCTAssertEqual(AppModel.instance.appState, AppState.inTimerVC)
   }
+  
+  func testTimerVC_whenStartedWithZeroTodayCount_countLabelTextIsZero() {
+    // given
+//    sut.viewModel.todayCount.onNext(0)
+    
+    // when
+    sut.viewDidLoad()
+    
+    // then
+    let countLabelText = sut.countLabel.text
+    XCTAssertEqual(countLabelText, "0")
+  }
+  
+  
+  func textTimerVC_whenStartedWithNotZeroTodayCount_countLabelTextIsNotZero() {
+    // given
+//    sut.viewModel.todayCount.onNext(10)
+    AppModel.instance.dataModel.inServerCount.onNext(100)
+    AppModel.instance.appStart()
+    
+    // when
+    sut.viewDidLoad()
+    
+    // then
+    let countLabelText = sut.countLabel.text
+    XCTAssertEqual(countLabelText, "100")
+  }
 
 }

@@ -24,4 +24,9 @@ extension MapViewModel {
     self.steps.accept(MainStep.check)
     print(#function)
   }
+  
+  public func navigateToLoginVC() {
+    self.steps.accept(MainStep.loginIsRequired)
+    print(#function)
+  }
 }

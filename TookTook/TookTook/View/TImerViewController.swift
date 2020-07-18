@@ -40,12 +40,21 @@ class TimerViewController: UIViewController {
       .map { "\($0)" }
       .bind(to: countLabel.rx.text)
       .disposed(by: rx.disposeBag)
+    
+    addCountButton.rx.tap
+      .map { [weak self] in
+        (self?.countLabel.text.map { Int($0)! + 1 })!
+    }
+    .subscribe(onNext: { [weak self] in
+      self?.viewModel.todayCount.onNext($0) })
+      .disposed(by: rx.disposeBag)
   }
   
   private func setUpUI() {
     view.addSubviews(views: [countLabel, addCountButton])
     setUpConstraints()
   }
+  
   private func setUpConstraints() {
     countLabel.snp.makeConstraints {
       $0.center.equalToSuperview()
@@ -57,8 +66,6 @@ class TimerViewController: UIViewController {
       $0.height.equalTo(50)
     }
   }
-  
-  
   
 }
 

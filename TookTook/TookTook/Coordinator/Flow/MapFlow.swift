@@ -30,6 +30,10 @@ class MapFlow: Flow {
       return mapVCInit()
     case .check:
       return mapCheck()
+    case .loginIsRequired:
+      return navigateToLoginVC()
+    case .back:
+      return back()
     default:
       return .none
     }
@@ -49,6 +53,21 @@ extension MapFlow {
   private func mapCheck() -> FlowContributors {
     print(#function, "check")
     
+    return .none
+  }
+  
+  private func navigateToLoginVC() -> FlowContributors {
+    let vc = LoginViewController()
+    vc.title = "Login"
+    vc.viewModel = LoginViewModel()
+    print(#function)
+    self.mapNavigationController.pushViewController(vc, animated: true)
+    return .one(flowContributor: .contribute(withNextPresentable: vc, withNextStepper: vc.viewModel))
+  }
+  
+  private func back() -> FlowContributors {
+    self.mapNavigationController.popViewController(animated: true)
+    print(#function)
     return .none
   }
 }

@@ -16,3 +16,10 @@ struct LoginViewModel: Stepper, ViewModel {
   var steps = PublishRelay<Step>()
 
 }
+
+extension LoginViewModel {
+  public func back() {
+    self.steps.accept(MainStep.back)
+    print("In LoginViewModel ", #function)
+  }
+}

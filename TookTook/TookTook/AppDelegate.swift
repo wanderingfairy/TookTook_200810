@@ -17,6 +17,8 @@ import Then
 import SnapKit
 import CoreData
 import Tapa
+import Firebase
+import FirebaseAuth
 
 #if DEBUG
 import Gedatsu
@@ -39,8 +41,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Gedatsu.open()
     FLEXManager.shared.showExplorer()
     #endif
+    FirebaseApp.configure()
     
     window = UIWindow(frame: UIScreen.main.bounds)
+    
+    // MARK: - login Check
+    if Auth.auth().currentUser == nil {
+      print("Login Is Required")
+      AppModel.instance.loginFlowStart()
+    } else {
+      AppModel.instance.userLoggedIn(uid: Auth.auth().currentUser?.uid ?? "none")
+      print("Already Logged in ")
+      print("uid is - ", Auth.auth().currentUser?.uid)
+    }
     
     // MARK: - tracking navigation action
     self.coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in

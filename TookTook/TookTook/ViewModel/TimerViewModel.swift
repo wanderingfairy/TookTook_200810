@@ -16,4 +16,8 @@ import Action
 struct TimerViewModel: Stepper, ViewModel {
   var steps = PublishRelay<Step>()
   var todayCount = AppModel.instance.dataModel.todayCount
+  
+  func timerStart() {
+    
+  }
 }
