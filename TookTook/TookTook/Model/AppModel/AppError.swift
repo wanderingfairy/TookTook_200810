@@ -9,5 +9,5 @@
 import Foundation
 
 enum AppError: Error {
-  case generalError, todayCountIsNil
+  case generalError, todayCountIsNil, timerInitError, updateCountError
 }

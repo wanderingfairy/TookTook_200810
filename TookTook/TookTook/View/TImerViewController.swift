@@ -21,6 +21,7 @@ class TimerViewController: UIViewController {
     $0.setTitleColor(.black, for: .normal)
     $0.backgroundColor = .orange
   }
+  let timerLabel = UILabel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,10 +33,12 @@ class TimerViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+    viewModel.setTimer()
   }
   
   private func bind() {
+    viewModel.timerStart()
+    
     viewModel.todayCount
       .map { "\($0)" }
       .bind(to: countLabel.rx.text)
@@ -46,12 +49,23 @@ class TimerViewController: UIViewController {
         (self?.countLabel.text.map { Int($0)! + 1 })!
     }
     .subscribe(onNext: { [weak self] in
+      self?.viewModel.timerInitInServer()
       self?.viewModel.todayCount.onNext($0) })
+      .disposed(by: rx.disposeBag)
+    
+    viewModel.todayCount
+      .subscribe(onNext: { print($0)})
+      .disposed(by: rx.disposeBag)
+    
+    viewModel.timerData
+      .subscribe(onNext: { [weak self] in
+        self?.timerLabel.text = "\($0.day)일 \($0.hour)시간 \($0.minute)분 \($0.second)초"
+      })
       .disposed(by: rx.disposeBag)
   }
   
   private func setUpUI() {
-    view.addSubviews(views: [countLabel, addCountButton])
+    view.addSubviews(views: [countLabel, addCountButton, timerLabel])
     setUpConstraints()
   }
   
@@ -64,6 +78,10 @@ class TimerViewController: UIViewController {
       $0.top.equalTo(countLabel.snp.bottom).offset(100)
       $0.width.equalToSuperview().multipliedBy(0.7)
       $0.height.equalTo(50)
+    }
+    timerLabel.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.bottom.equalTo(countLabel.snp.top).offset(-50)
     }
   }
   

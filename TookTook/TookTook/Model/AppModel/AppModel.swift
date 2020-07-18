@@ -20,6 +20,7 @@ class AppModel {
     appState = .inMapVC
     dataModel.start()
   }
+  
   func timerVCStart() {
     appState = .inTimerVC
   }

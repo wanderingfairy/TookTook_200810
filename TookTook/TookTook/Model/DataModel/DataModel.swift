@@ -19,9 +19,27 @@ struct DataModel {
   var bag = DisposeBag()
   
   func start() {
-    inServerCount
+    getServerCount()
+  }
+  
+  func getServerCount() {
+    APIManager().getServerCount { (serverCount) in
+      self.inServerCount.onNext(serverCount)
+      self.inServerCount
+        .subscribe(onNext: {
+          self.todayCount.onNext($0)
+          self.bindCountWithServer()
+        })
+        .disposed(by: self.bag)
+    }
+  }
+  
+  func  bindCountWithServer(){
+    todayCount
       .subscribe(onNext: {
-        self.todayCount.onNext($0)
+        APIManager().postUpdateCountInServer(currentCount: $0) {
+          print(#function)
+        }
       })
       .disposed(by: bag)
   }

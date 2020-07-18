@@ -19,7 +19,7 @@ class UserModel {
   
   private let bag = DisposeBag()
   
-  private var firebaseUID = BehaviorSubject<String?>(value: nil)
+  private let firebaseUID = BehaviorSubject<String?>(value: nil)
   
   
   func settingUID(withUID uid: String) {
@@ -29,4 +29,15 @@ class UserModel {
       .subscribe(onNext: { print("current saved UID is", $0)})
       .disposed(by: bag)
   }
+  
+  func currentUID() -> String {
+    var uid = String()
+    
+    firebaseUID
+      .subscribe(onNext: { uid = $0 ?? "none" })
+      .disposed(by: bag)
+    
+    return uid
+  }
+  
 }
