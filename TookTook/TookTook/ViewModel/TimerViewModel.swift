@@ -22,6 +22,7 @@ struct TimerViewModel: Stepper, ViewModel {
   var serverCount = AppModel.instance.dataModel.inServerCount
   var timerData = BehaviorSubject<TimeModel>(value: TimeModel())
   var stopWatch = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+  var weeklyAverage = BehaviorSubject<Int>(value: 0)
   
   func timerStart() {
     stopWatch
@@ -31,7 +32,7 @@ struct TimerViewModel: Stepper, ViewModel {
           .observeOn(MainScheduler.instance)
           .debounce(.milliseconds(998), scheduler: MainScheduler.instance)
           .subscribe(onNext: {
-            let nextSecondModel = TimeModel(day: $0.day, hour: $0.hour, minute: $0.minute, second: $0.second + 1)
+            let nextSecondModel = self.timeModelSelfCycle(oldTime: $0)
             self.timerData.onNext(nextSecondModel)
           })
           .disposed(by: self.bag)
@@ -51,33 +52,25 @@ struct TimerViewModel: Stepper, ViewModel {
     }
   }
   
+  func loadWeekAverage() {
+    APIManager().getWeekCounts { (avg) in
+      print(#function, avg)
+      self.weeklyAverage.onNext(avg)
+    }
+  }
   
+  private func timeModelSelfCycle(oldTime: TimeModel) -> TimeModel {
+    
+    oldTime.second == 59 ? TimeModel(day: oldTime.day, hour: oldTime.hour, minute: oldTime.minute + 1, second: 0) :
+    oldTime.minute == 59 ? TimeModel(day: oldTime.day, hour: oldTime.hour + 1, minute: 0, second: 0) :
+    oldTime.hour == 23 ? TimeModel(day: oldTime.day + 1, hour: 0, minute: 0, second: 0) :
+      TimeModel(day: oldTime.day, hour: oldTime.hour, minute: oldTime.minute, second: oldTime.second + 1)
+  }
 }
 
 struct TimeModel {
   var day = 0
-  var hour = 0 {
-    didSet {
-      if oldValue == 23 {
-        day += 1
-        hour = 0
-      }
-    }
-  }
-  var minute = 0 {
-    didSet {
-      if oldValue == 59 {
-        self.hour += 1
-        minute = 0
-      }
-    }
-  }
-  var second = 0  {
-     didSet {
-      if oldValue == 59 {
-        self.minute += 1
-        second = 0
-      }
-     }
-   }
+  var hour = 0
+  var minute = 0
+  var second = 0
 }

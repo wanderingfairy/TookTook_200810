@@ -20,6 +20,9 @@ target 'TookTook' do
   pod 'FirebaseUI'
   pod 'GoogleSignIn'
 
+  # For Charts
+  pod 'Charts'
+
 
   target 'TookTookTests' do
     inherit! :search_paths

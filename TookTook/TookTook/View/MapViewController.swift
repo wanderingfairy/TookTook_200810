@@ -18,6 +18,11 @@ class MapViewController: UIViewController {
     
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.navigationBar.isHidden = true
+  }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     AppModel.instance.appStart()

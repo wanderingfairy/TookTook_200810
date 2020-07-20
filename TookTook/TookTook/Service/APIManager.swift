@@ -70,6 +70,29 @@ class APIManager {
     }
   }
   
+  public func getWeekCounts(completion: @escaping (Int) -> Void) {
+    let today = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyyMMdd"
+    let todayStr = dateFormatter.string(from: today)
+    
+    ref.child(uid).child("TodayCount").observeSingleEvent(of: .value) { (dataSnp) in
+      guard let weeksCountArr = dataSnp.value as? [String:Int] else { return }
+      var result = weeksCountArr.sorted { $1.key < $0.key }
+      
+      while result.count > 8 {
+        result = result.dropLast()
+        print("dropLast!")
+      }
+      
+      if result.first?.key == todayStr {
+        result.removeFirst()
+      }
+      
+      completion(result.map { $0.value }.reduce(0, +) / result.count)
+    }
+  }
+  
   // MARK: - Post
   public func postInitialServerTimer(completion: @escaping () -> ()) {
     let now = Date()
