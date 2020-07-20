@@ -112,11 +112,11 @@ class TimerViewController: UIViewController {
       .filter{ [unowned self] in
         Int(self.countLabel.text!)! > 0}
       .map {  [weak self] in
-             (self?.countLabel.text.map { Int($0)! - 1 })!}
+        (self?.countLabel.text.map { Int($0)! - 1 })!}
       .subscribe(onNext: { [weak self] in
         self?.viewModel.timerInitInServer()
         self?.viewModel.todayCount.onNext($0) })
-        .disposed(by: rx.disposeBag)
+      .disposed(by: rx.disposeBag)
     
     viewModel.todayCount
       .subscribe(onNext: { print($0)})
@@ -188,18 +188,36 @@ class TimerViewController: UIViewController {
   
   private func setUpConstraints() {
     
-    
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
     
     cigaretteNameLabel.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(22)
+      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(dynamicFontSize(22))
       $0.leading.equalTo(20)
     }
     
     cigarettePackImage.snp.makeConstraints {
       $0.leading.equalToSuperview()
       $0.trailing.equalTo(view.snp.trailing).multipliedBy(0.5)
-      $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.45)
       $0.height.equalTo(cigarettePackImage.snp.width).offset(-5)
+      
+      switch height {
+      case 480.0: //Iphone 3,4S => 3.5 inch
+        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
+      case 568.0: //iphone 5, SE => 4 inch
+        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
+      case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
+      case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.49)
+      case 812.0: //iphone X, XS => 5.8 inch
+        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.49)
+      case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.48)
+      default:
+        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
+      }
+        
     }
     
     lastCigaretteLabel.snp.makeConstraints {
@@ -230,8 +248,25 @@ class TimerViewController: UIViewController {
     }
     
     todayCountTitleLabel.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(20)
+      
       $0.centerX.equalToSuperview()
+      
+      switch height {
+      case 480.0: //Iphone 3,4S => 3.5 inch
+        $0.top.equalToSuperview().offset(11)
+      case 568.0: //iphone 5, SE => 4 inch
+        $0.top.equalToSuperview().offset(12)
+      case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+        $0.top.equalToSuperview().offset(14)
+      case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+        $0.top.equalToSuperview().offset(16)
+      case 812.0: //iphone X, XS => 5.8 inch
+        $0.top.equalToSuperview().offset(18)
+      case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+        $0.top.equalToSuperview().offset(20)
+      default:
+        $0.top.equalToSuperview().offset(20)
+      }
     }
     
     countLabel.snp.makeConstraints {
@@ -252,6 +287,7 @@ class TimerViewController: UIViewController {
       $0.bottom.equalToSuperview().offset(-30)
       $0.height.equalToSuperview().multipliedBy(0.2)
     }
+
   }
   
 }
@@ -259,7 +295,7 @@ class TimerViewController: UIViewController {
 extension TimerViewController {
   func timerTextSetUp() {
     [dayLabel, hourLabel, minuteLabel, secondLabel].forEach({
-      $0.font = UIFont(name: "NotoSans-ExtraBold", size: 24)
+      $0.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(24))
       $0.textColor = UIColor(named: "SmallFontColor")
       $0.textAlignment = .left
       
@@ -271,7 +307,7 @@ extension TimerViewController {
   }
   
   func weekAvgLabelTextSetup(_ label: UILabel) {
-    label.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: 50)
+    label.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: dynamicFontSize(50))
     label.textColor = UIColor(named: "SmallFontColor")
     label.textAlignment = .left
     
@@ -284,7 +320,7 @@ extension TimerViewController {
   func weekAvgTitleLabelTextSetup(_ label: UILabel) {
     label.text = "Last Week\nAverage :"
     label.numberOfLines = 2
-    label.font = UIFont(name: "NotoSans-ExtraBold", size: 24)
+    label.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(24))
     label.textColor = UIColor(named: "SmallFontColor")
     label.textAlignment = .left
     
@@ -296,21 +332,22 @@ extension TimerViewController {
   
   func cigaretteNameLabelTextSetup(_ label: UILabel) {
     let attributedString = NSMutableAttributedString(string: "BOHAM CIGAR -\nSlim Fit White", attributes: [
-         .font: UIFont(name: "NotoSans-ExtraBold", size: 38.0)!,
-         .foregroundColor: UIColor(red: 206.0 / 255.0, green: 75.0 / 255.0, blue: 70.0 / 255.0, alpha: 1.0)
-       ])
-       attributedString.addAttribute(.font, value: UIFont(name: "NotoSans-BoldItalic", size: 38.0)!, range: NSRange(location: 14, length: 14))
-       
-       label.attributedText = attributedString
-       label.numberOfLines = 2
-       label.layer.shadowOffset = CGSize(width: 3, height: 3)
-       label.layer.shadowOpacity = 1
-       label.layer.shadowRadius = 0
-       label.layer.shadowColor = UIColor(named: "NameBackColor")?.cgColor
+      .font: UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(38))!,
+      .foregroundColor: UIColor(red: 206.0 / 255.0, green: 75.0 / 255.0, blue: 70.0 / 255.0, alpha: 1.0)
+    ])
+    attributedString.addAttribute(.font, value: UIFont(name: "NotoSans-BoldItalic", size: dynamicFontSize(38))!, range: NSRange(location: 14, length: 14))
+    
+    label.attributedText = attributedString
+    label.numberOfLines = 2
+    
+    label.layer.shadowOffset = CGSize(width: 3, height: 3)
+    label.layer.shadowOpacity = 1
+    label.layer.shadowRadius = 0
+    label.layer.shadowColor = UIColor(named: "NameBackColor")?.cgColor
   }
   
   func lastCigaretteLabelTextSetup(_ label: UILabel) {
-    label.font = UIFont(name: "NotoSans-ExtraBold", size: 24)
+    label.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(24))
     label.textColor = UIColor(named: "SmallFontColor")
     label.textAlignment = .left
     
@@ -318,11 +355,12 @@ extension TimerViewController {
     label.layer.shadowOpacity = 1
     label.layer.shadowRadius = 0
     label.layer.shadowColor = UIColor(named: "SmallFontBackColor")?.cgColor
+    label.dynamicFont(fontSize: label.font.pointSize)
   }
   
   func todayCountTitleLabelSetup(_ label: UILabel) {
     label.text = "Today Count"
-    label.font = UIFont(name: "NotoSans-ExtraBold", size: 44)
+    label.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(44))
     label.textColor = UIColor.black
     label.textAlignment = .center
     
@@ -333,7 +371,7 @@ extension TimerViewController {
   }
   
   func countLabelTextSetup(_ label: UILabel) {
-    label.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: 114)
+    label.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: dynamicFontSize(114))
     label.textColor = UIColor(named: "CountLabelColor")
     label.textAlignment = .left
     
@@ -345,7 +383,7 @@ extension TimerViewController {
   
   func upCountButtonSetup(_ button: UIButton) {
     button.setTitle("Up", for: .normal)
-    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: 44)
+    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(44))
     button.backgroundColor = UIColor.apple
     
     button.layer.cornerRadius = 10
@@ -357,7 +395,7 @@ extension TimerViewController {
   
   func downCountButtonSetup(_ button: UIButton) {
     button.setTitle("Down", for: .normal)
-    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: 44)
+    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(44))
     button.backgroundColor = UIColor.coral
     
     button.layer.cornerRadius = 10
@@ -367,20 +405,131 @@ extension TimerViewController {
     button.layer.shadowColor = UIColor.black.cgColor
   }
   
+  func dynamicFontSize(_ size: CGFloat) -> CGFloat {
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
+    
+    switch height {
+    case 480.0: //Iphone 3,4S => 3.5 inch
+      return size * 0.535
+    case 568.0: //iphone 5, SE => 4 inch
+      return size * 0.74
+    case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+      return size * 0.92
+    case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+      return size * 0.82
+    case 812.0: //iphone X, XS => 5.8 inch
+      return size * 0.9
+    case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+      return size
+    default:
+      return size
+    }
+  }
+  
+  
+  
 }
 
 extension UIColor {
-
+  
   @nonobjc class var cherryRed16: UIColor {
     return UIColor(red: 1.0, green: 0.0, blue: 39.0 / 255.0, alpha: 0.16)
   }
-
+  
   @nonobjc class var apple: UIColor {
     return UIColor(red: 107.0 / 255.0, green: 219.0 / 255.0, blue: 59.0 / 255.0, alpha: 1.0)
   }
-
+  
   @nonobjc class var coral: UIColor {
     return UIColor(red: 244.0 / 255.0, green: 83.0 / 255.0, blue: 83.0 / 255.0, alpha: 1.0)
   }
+  
+}
 
+extension UILabel {
+  
+  func dynamicFont(fontSize size: CGFloat) {
+    let currentFontName = self.font.fontName
+    var calculatedFont: UIFont?
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
+    
+    switch height {
+    case 480.0: //Iphone 3,4S => 3.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.7)
+      resizeFont(calculatedFont: calculatedFont)
+      break
+    case 568.0: //iphone 5, SE => 4 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.8)
+      resizeFont(calculatedFont: calculatedFont)
+      break
+    case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.92)
+      resizeFont(calculatedFont: calculatedFont)
+      break
+    case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.95)
+      resizeFont(calculatedFont: calculatedFont)
+      break
+    case 812.0: //iphone X, XS => 5.8 inch
+      calculatedFont = UIFont(name: currentFontName, size: size)
+      resizeFont(calculatedFont: calculatedFont)
+      break
+    case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 1.15)
+      resizeFont(calculatedFont: calculatedFont)
+      break
+    default:
+      print("not an iPhone")
+      break
+    }
+  }
+  
+  private func resizeFont(calculatedFont: UIFont?) {
+    self.font = calculatedFont
+    self.font = UIFont(name: "NotoSans-ExtraBold", size: calculatedFont!.pointSize)
+  }
+  
+  func dynamicFontItalic(fontSize size: CGFloat) {
+    let currentFontName = self.font.fontName
+    var calculatedFont: UIFont?
+    let bounds = UIScreen.main.bounds
+    let height = bounds.size.height
+    
+    switch height {
+    case 480.0: //Iphone 3,4S => 3.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.7)
+      resizeFontItalic(calculatedFont: calculatedFont)
+      break
+    case 568.0: //iphone 5, SE => 4 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.8)
+      resizeFontItalic(calculatedFont: calculatedFont)
+      break
+    case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.92)
+      resizeFontItalic(calculatedFont: calculatedFont)
+      break
+    case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 0.95)
+      resizeFontItalic(calculatedFont: calculatedFont)
+      break
+    case 812.0: //iphone X, XS => 5.8 inch
+      calculatedFont = UIFont(name: currentFontName, size: size)
+      resizeFontItalic(calculatedFont: calculatedFont)
+      break
+    case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+      calculatedFont = UIFont(name: currentFontName, size: size * 1.15)
+      resizeFontItalic(calculatedFont: calculatedFont)
+      break
+    default:
+      print("not an iPhone")
+      break
+    }
+  }
+  
+  private func resizeFontItalic(calculatedFont: UIFont?) {
+    self.font = calculatedFont
+    self.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: calculatedFont!.pointSize)
+  }
 }
