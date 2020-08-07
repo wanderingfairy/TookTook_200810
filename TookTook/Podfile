@@ -22,7 +22,13 @@ target 'TookTook' do
 
   # For Charts
   pod 'Charts'
+  
+  # For GoogleMaps & GooglePlace
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
+  # For SkeletonView
+  pod "SkeletonView"
 
   target 'TookTookTests' do
     inherit! :search_paths

@@ -348,6 +348,13 @@ PODS:
   - GoogleDataTransportCCTSupport (3.2.0):
     - GoogleDataTransport (~> 6.1)
     - nanopb (~> 1.30905.0)
+  - GoogleMaps (3.9.0):
+    - GoogleMaps/Maps (= 3.9.0)
+  - GoogleMaps/Base (3.9.0)
+  - GoogleMaps/Maps (3.9.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.9.0):
+    - GoogleMaps/Base (= 3.9.0)
   - GoogleSignIn (5.0.2):
     - AppAuth (~> 1.2)
     - GTMAppAuth (~> 1.0)
@@ -413,6 +420,7 @@ PODS:
   - SDWebImage (5.8.1):
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
+  - SkeletonView (1.8.7)
   - Tapa (0.3.0)
 
 DEPENDENCIES:
@@ -424,7 +432,10 @@ DEPENDENCIES:
   - FirebaseUI
   - FLEX
   - Gedatsu
+  - GoogleMaps
+  - GooglePlaces
   - GoogleSignIn
+  - SkeletonView
   - Tapa
 
 SPEC REPOS:
@@ -450,6 +461,8 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
+    - GoogleMaps
+    - GooglePlaces
     - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
@@ -460,6 +473,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SDWebImage
+    - SkeletonView
     - Tapa
 
 SPEC CHECKSUMS:
@@ -484,6 +498,8 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 2fd5c5a56c069db635c8e7b92d4809a9591d0a69
   GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
   GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
+  GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   "gRPC-C++": 13d8ccef97d5c3c441b7e3c529ef28ebee86fad2
@@ -494,8 +510,9 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  SkeletonView: ba5370f41280b2f0a76918bb143c1294232bb4f4
   Tapa: ce6cf1378422000a8fc6966362856bb1241b13c9
 
-PODFILE CHECKSUM: 52f53234374ec580e79cb937742040e73a216418
+PODFILE CHECKSUM: 5c521881ba0221fc9e3a2653b8ff32a1f9e76b3a
 
 COCOAPODS: 1.8.4
