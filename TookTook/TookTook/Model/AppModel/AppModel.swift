@@ -36,4 +36,8 @@ class AppModel {
     authState = .userLoggedIn
     UserModel.instance.settingUID(withUID: uid)
   }
+  
+  
+  
+  // Map Flow
 }

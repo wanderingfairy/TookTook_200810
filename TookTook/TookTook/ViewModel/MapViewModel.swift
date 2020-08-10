@@ -33,6 +33,8 @@ struct MapViewModel: Stepper, ViewModel {
   
   var myLocationButtonFrame = CGRect(x: 0, y: 0, width: 0, height: 0)
   
+  var markersInServer = AppModel.instance.dataModel.markers
+  
   var bag = DisposeBag()
   
   func validateAuthState() {
@@ -67,6 +69,31 @@ struct MapViewModel: Stepper, ViewModel {
     }
     camera = GMSCameraPosition.camera(withLatitude: currentUserLocation.latitude, longitude: currentUserLocation.longitude, zoom: 17.0)
     currentCameraPosition = BehaviorSubject<CLLocationCoordinate2D>(value: camera.target)
+    
+    bind()
+  }
+  
+  func bind() {
+    addMarkerPosition
+      .subscribe(onNext: {
+        APIManager().postAddMarkerToUserDataInServer(title: $0.title ?? "Title", snippet: $0.snippet ?? "Snippet", position: $0.position) { (log) in
+          print(log)
+        }
+      })
+      .disposed(by: bag)
+    
+    addMarkerPosition
+    .subscribe(onNext: {
+      APIManager().postAddMarkerToCommonDataInServer(title: $0.title ?? "Title", snippet: $0.snippet ?? "Snippet", position: $0.position) { (log) in
+        print(log)
+      }
+    })
+    .disposed(by: bag)
+    
+    APIManager().getAllMarkersInCommonDataWhenMapStarted(completion: { markerArr in
+      AppModel.instance.dataModel.markers.onNext(markerArr)
+    })
+    
   }
   
   mutating func findMyLocationButton(subviews: [UIView], addMarkerButton: UIButton) {
@@ -112,3 +139,4 @@ extension MapViewModel {
     print(#function)
   }
 }
+

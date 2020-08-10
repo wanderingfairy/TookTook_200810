@@ -11,6 +11,8 @@ import Firebase
 import RxSwift
 import RxCocoa
 import RxFlow
+import CoreLocation
+import GoogleMaps
 
 class APIManager {
   
@@ -93,6 +95,29 @@ class APIManager {
     }
   }
   
+  public func getAllMarkersInCommonDataWhenMapStarted(completion: @escaping ([GMSMarker]) -> Void) {
+    var resultMarkerArr: [GMSMarker] = []
+    ref.child("SmokingZoneData").observeSingleEvent(of: .value) { (dataSnp) in
+      guard let allMarkers = dataSnp.value as? [String : Any] else { return }
+      print(#function)
+//      print(allMarkers.first)
+      allMarkers.forEach {
+        guard let innerValue = $0.value as? [String:Any] else { return }
+        let lat = innerValue["lat"] as? Double
+        let long = innerValue["long"] as? Double
+        let title = innerValue["title"] as? String
+        let snippet = innerValue["snippet"] as? String
+        
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+        marker.title = title
+        marker.snippet = snippet
+        marker.icon = UIImage(named: "PinImage")
+        resultMarkerArr.append(marker)
+      }
+      completion(resultMarkerArr)
+    }
+  }
+  
   // MARK: - Post
   public func postInitialServerTimer(completion: @escaping () -> ()) {
     let now = Date()
@@ -127,6 +152,39 @@ class APIManager {
       } else {
         print(#function)
         print(AppError.updateCountError)
+      }
+    }
+  }
+  
+  public func postAddMarkerToUserDataInServer(title: String, snippet: String, position: CLLocationCoordinate2D, completion: @escaping (String) -> ()) {
+    
+    let now = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyyMMddHHmmss"
+    let currentDate = dateFormatter.string(from: now)
+    
+    let value = ["title" : title, "snippet" : snippet, "lat" : position.latitude, "long" : position.longitude, "uid" : uid] as [String:Any]
+    ref.child(uid).child("SmokingZoneThisUserAdded").child(currentDate).setValue(value) { err, _ in
+      if err == nil {
+        completion("upload To User Data In Server is Completed")
+      } else {
+        print(AppError.markerUploadInUserDataError)
+      }
+    }
+  }
+  
+  public func postAddMarkerToCommonDataInServer(title: String, snippet: String, position: CLLocationCoordinate2D, completion: @escaping (String) -> ()) {
+    let now = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyyMMddHHmmss"
+    let currentDate = dateFormatter.string(from: now)
+    
+    let value = ["title" : title, "snippet" : snippet, "lat" : position.latitude, "long" : position.longitude, "uid" : uid] as [String:Any]
+    ref.child("SmokingZoneData").child(currentDate).setValue(value) { err, _ in
+      if err == nil {
+        completion("upload To SmokingZoneData In Server is Completed")
+      } else {
+        print(AppError.markerUploadToCommonDataError)
       }
     }
   }

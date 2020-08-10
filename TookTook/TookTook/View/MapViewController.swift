@@ -126,6 +126,16 @@ class MapViewController: UIViewController {
         self.disappearDummyMarkerView()
     }
     .disposed(by: rx.disposeBag)
+    
+    self.viewModel.markersInServer
+      .observeOn(MainScheduler.instance)
+      .bind {
+        self.mapView.clear()
+        $0.forEach {
+          $0.map = self.mapView
+        }
+    }
+    .disposed(by: rx.disposeBag)
   }
   
   // MARK: - Set up UI & Constraints
