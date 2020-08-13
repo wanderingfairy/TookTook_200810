@@ -72,7 +72,9 @@ class MapViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    AppModel.instance.inMapVC()
     self.navigationController?.navigationBar.isHidden = true
+    self.tabBarController?.tabBar.isHidden = false
   }
   
   override func viewDidAppear(_ animated: Bool) {

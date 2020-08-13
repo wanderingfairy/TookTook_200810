@@ -50,8 +50,8 @@ extension RootFlow {
     Flows.use(mapFlow, timerFlow, when: .ready) {
       [unowned self] (root1: UINavigationController, root2: UINavigationController) in
       
-      let tabBarItem1 = UITabBarItem(title: "Map", image: nil, selectedImage: nil)
-      let tabBarItem2 = UITabBarItem(title: "Timer", image: nil, selectedImage: nil)
+      let tabBarItem1 = UITabBarItem(title: "Map", image: UIImage(systemName: "map"), selectedImage: nil)
+      let tabBarItem2 = UITabBarItem(title: "Timer", image: UIImage(systemName: "timer"), selectedImage: nil)
       root1.tabBarItem = tabBarItem1
       root1.title = "Map"
       root2.tabBarItem = tabBarItem2

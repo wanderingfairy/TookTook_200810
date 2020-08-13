@@ -16,6 +16,27 @@ class TimerViewController: UIViewController {
   
   var viewModel: TimerViewModel!
   
+  lazy var todayLabelView = UIView()
+  
+  lazy var todayLabelBackView = UIImageView().then {
+    $0.image = UIImage(named: "todayTitleLabelBackView")
+  }
+  
+  lazy var last7DayLabelView = UIView()
+  lazy var last7DayLabelBackView = UIImageView().then {
+    $0.image = UIImage(named: "last7DayLabelBackView")
+  }
+  
+  lazy var daysAvgView = UIView()
+  lazy var daysAvgBackView = UIImageView().then {
+    $0.image = UIImage(named: "last7DayLabelBackView")
+  }
+  
+  lazy var lastCigaretteView = UIView()
+  lazy var lastCigaretteBackView = UIImageView().then {
+    $0.image = UIImage(named: "lastCigaretteBackView")
+  }
+  
   let secondLabel = UILabel()
   let minuteLabel = UILabel().then {
     $0.isHidden = true
@@ -30,10 +51,6 @@ class TimerViewController: UIViewController {
     weekAvgLabelTextSetup($0)
   }
   
-  lazy var cigaretteNameLabel = UILabel().then {
-    cigaretteNameLabelTextSetup($0)
-  }
-  
   lazy var cigarettePackImage = UIImageView().then {
     $0.image = UIImage(named: "cigarettePack")
   }
@@ -46,7 +63,7 @@ class TimerViewController: UIViewController {
   }
   
   lazy var lastCigaretteLabel = UILabel().then {
-    $0.text = "Last Cigarette"
+    $0.text = "Your last cigarette"
     lastCigaretteLabelTextSetup($0)
   }
   
@@ -71,22 +88,40 @@ class TimerViewController: UIViewController {
   lazy var upCountButton = UIButton().then {
     upCountButtonSetup($0)
   }
+  lazy var upCountButtonBackView = UIImageView().then {
+    $0.image = UIImage(named: "plusButton")
+  }
   
   lazy var downCountButton = UIButton().then {
     downCountButtonSetup($0)
+  }
+  lazy var downCountButtonBackView = UIImageView().then {
+    $0.image = UIImage(named: "minusButton")
+  }
+  lazy var settingButton = UIButton()
+  lazy var settingButtonBackView = UIImageView().then {
+    $0.image = UIImage(named: "settingButton")
+  }
+  lazy var last7DaysCountLabel = UILabel().then {
+    last7DayLabelTextSetup($0)
+  }
+  lazy var last7DaysTitleLabel = UILabel().then {
+    last7DayTitleLabelTextSetup($0)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     AppModel.instance.timerVCStart()
-    view.backgroundColor = UIColor(named: "TimerBackColor")
+    view.backgroundColor = UIColor(named: "grayBackgroundColor")
     bind()
     setUpUI()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    AppModel.instance.inTimerVC()
     self.navigationController?.navigationBar.isHidden = true
+    self.tabBarController?.tabBar.isHidden = false
     viewModel.setTimer()
   }
   
@@ -176,13 +211,18 @@ class TimerViewController: UIViewController {
       .map { "\($0)"}
       .bind(to: self.weekAvgLabel.rx.text)
       .disposed(by: rx.disposeBag)
+    
+    viewModel.weeklyAllCount
+      .map { "\($0)"}
+      .bind(to: self.last7DaysCountLabel.rx.text)
+      .disposed(by: rx.disposeBag)
+    
   }
   
   private func setUpUI() {
     timerTextSetUp()
     
-    view.addSubviews(views: [timeStackView, weekAvgLabel, cigaretteNameLabel, cigarettePackImage, lastCigaretteLabel, weekAvgTitleLabel, timerBottomView])
-    timerBottomView.addSubviews(views: [todayCountTitleLabel, countLabel, upCountButton, downCountButton])
+    view.addSubviews(views: [todayLabelBackView, todayLabelView, last7DayLabelView, last7DayLabelBackView, daysAvgView, daysAvgBackView, lastCigaretteView, lastCigaretteBackView, upCountButton, downCountButton, countLabel, todayCountTitleLabel, timeStackView, lastCigaretteLabel, weekAvgLabel, weekAvgTitleLabel, upCountButtonBackView, downCountButtonBackView, settingButton, settingButtonBackView, last7DaysCountLabel, last7DaysTitleLabel])
     setUpConstraints()
   }
   
@@ -191,102 +231,131 @@ class TimerViewController: UIViewController {
     let bounds = UIScreen.main.bounds
     let height = bounds.size.height
     
-    cigaretteNameLabel.snp.makeConstraints {
-      $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(dynamicFontSize(22))
-      $0.leading.equalTo(20)
+    todayLabelView.snp.makeConstraints {
+      $0.top.equalTo(view.safeAreaLayoutGuide).offset(dynamicHeight(34))
+      $0.centerX.equalToSuperview()
+      $0.width.equalToSuperview().multipliedBy(0.9)
+      $0.height.equalToSuperview().multipliedBy(0.22)
     }
     
-    cigarettePackImage.snp.makeConstraints {
-      $0.leading.equalToSuperview()
-      $0.trailing.equalTo(view.snp.trailing).multipliedBy(0.5)
-      $0.height.equalTo(cigarettePackImage.snp.width).offset(-5)
-      
-      switch height {
-      case 480.0: //Iphone 3,4S => 3.5 inch
-        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
-      case 568.0: //iphone 5, SE => 4 inch
-        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
-      case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
-        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
-      case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
-        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.49)
-      case 812.0: //iphone X, XS => 5.8 inch
-        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.49)
-      case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
-        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.48)
-      default:
-        $0.bottom.equalTo(view.snp.bottom).multipliedBy(0.5)
-      }
-        
+    todayLabelBackView.snp.makeConstraints {
+      $0.center.equalTo(todayLabelView)
+      $0.width.equalTo(todayLabelView).multipliedBy(1.2)
+      $0.height.equalTo(todayLabelView).multipliedBy(1.35)
     }
     
-    lastCigaretteLabel.snp.makeConstraints {
-      $0.top.equalTo(cigarettePackImage.snp.top).offset(5)
-      $0.leading.equalTo(view.snp.centerX)
+    last7DayLabelView.snp.makeConstraints {
+      $0.leading.equalTo(todayLabelView)
+      $0.top.equalTo(todayLabelView.snp.bottom).offset(dynamicHeight(40))
+      $0.trailing.equalTo(view.snp.centerX).offset(-10)
+      $0.height.equalToSuperview().multipliedBy(0.12)
     }
     
-    timeStackView.snp.makeConstraints {
-      $0.top.equalTo(lastCigaretteLabel.snp.bottom)
-      $0.leading.equalTo(lastCigaretteLabel)
+    last7DayLabelBackView.snp.makeConstraints {
+      $0.center.equalTo(last7DayLabelView)
+      $0.width.equalTo(last7DayLabelView).multipliedBy(1.46)
+      $0.height.equalTo(last7DayLabelView).multipliedBy(1.66)
     }
-    
-    weekAvgTitleLabel.snp.makeConstraints {
-      $0.top.equalTo(timeStackView.snp.bottom).offset(22)
-      $0.leading.equalTo(lastCigaretteLabel)
+    daysAvgView.snp.makeConstraints {
+      $0.trailing.equalTo(todayLabelView)
+      $0.top.equalTo(last7DayLabelView)
+      $0.leading.equalTo(view.snp.centerX).offset(10)
+      $0.height.equalToSuperview().multipliedBy(0.12)
     }
-    
+    daysAvgBackView.snp.makeConstraints {
+      $0.center.equalTo(daysAvgView)
+      $0.width.equalTo(daysAvgView).multipliedBy(1.46)
+      $0.height.equalTo(daysAvgView).multipliedBy(1.66)
+    }
     weekAvgLabel.snp.makeConstraints {
-      $0.centerY.equalTo(weekAvgTitleLabel)
-      $0.leading.equalTo(weekAvgTitleLabel.snp.trailing).offset(12)
+      $0.bottom.equalTo(daysAvgView.snp.centerY).offset(10)
+      $0.centerX.equalTo(daysAvgView)
+    }
+    weekAvgTitleLabel.snp.makeConstraints {
+      $0.top.equalTo(daysAvgView.snp.centerY).offset(10)
+      $0.centerX.equalTo(daysAvgView)
+    }
+    last7DaysCountLabel.snp.makeConstraints {
+      $0.bottom.equalTo(last7DayLabelView.snp.centerY).offset(10)
+      $0.centerX.equalTo(last7DayLabelView)
+    }
+    last7DaysTitleLabel.snp.makeConstraints {
+      $0.top.equalTo(last7DayLabelView.snp.centerY).offset(10)
+      $0.centerX.equalTo(last7DayLabelView)
     }
     
-    timerBottomView.snp.makeConstraints {
-      $0.top.equalTo(view.snp.centerY).offset(30)
-      $0.leading.equalToSuperview()
-      $0.trailing.equalToSuperview()
-      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+    lastCigaretteView.snp.makeConstraints {
+      $0.top.equalTo(last7DayLabelView.snp.bottom).offset(dynamicHeight(46))
+      $0.leading.equalTo(todayLabelView)
+      $0.trailing.equalTo(todayLabelView)
+      $0.height.equalToSuperview().multipliedBy(0.143)
+    }
+    lastCigaretteBackView.snp.makeConstraints {
+      $0.center.equalTo(lastCigaretteView)
+      $0.width.equalTo(lastCigaretteView).multipliedBy(1.21)
+      $0.height.equalTo(lastCigaretteView).multipliedBy(1.88)
+    }
+    timeStackView.snp.makeConstraints {
+      $0.top.equalTo(lastCigaretteView).offset(15)
+      $0.centerX.equalTo(lastCigaretteView)
+    }
+    lastCigaretteLabel.snp.makeConstraints {
+      $0.top.equalTo(lastCigaretteView.snp.centerY).offset(10)
+      $0.centerX.equalTo(lastCigaretteView)
+    }
+    
+
+    
+    upCountButton.snp.makeConstraints {
+      $0.trailing.equalTo(todayLabelView)
+      $0.top.equalTo(lastCigaretteView.snp.bottom).offset(dynamicHeight(46))
+      $0.width.equalToSuperview().multipliedBy(0.24)
+      $0.height.equalTo(view.snp.width).multipliedBy(0.23)
+    }
+    
+    upCountButtonBackView.snp.makeConstraints {
+      $0.center.equalTo(upCountButton)
+      $0.width.equalTo(upCountButton).multipliedBy(1.76)
+      $0.height.equalTo(upCountButton).multipliedBy(1.82)
+    }
+    
+    downCountButton.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(lastCigaretteView.snp.bottom).offset(dynamicHeight(46))
+      $0.width.equalToSuperview().multipliedBy(0.24)
+      $0.height.equalTo(view.snp.width).multipliedBy(0.23)
+    }
+    downCountButtonBackView.snp.makeConstraints {
+      $0.center.equalTo(downCountButton)
+      $0.width.equalTo(downCountButton).multipliedBy(1.76)
+      $0.height.equalTo(downCountButton).multipliedBy(1.82)
+    }
+    
+    settingButton.snp.makeConstraints {
+      $0.leading.equalTo(todayLabelView)
+      $0.top.equalTo(lastCigaretteView.snp.bottom).offset(dynamicHeight(46))
+      $0.width.equalToSuperview().multipliedBy(0.24)
+      $0.height.equalTo(view.snp.width).multipliedBy(0.23)
+    }
+    settingButtonBackView.snp.makeConstraints {
+      $0.center.equalTo(settingButton)
+      $0.width.equalTo(settingButton).multipliedBy(1.76)
+      $0.height.equalTo(settingButton).multipliedBy(1.82)
+    }
+    
+    
+    countLabel.snp.makeConstraints {
+      $0.centerX.equalTo(todayLabelView)
+      $0.bottom.equalTo(todayLabelView.snp.centerY).offset(10)
     }
     
     todayCountTitleLabel.snp.makeConstraints {
       
-      $0.centerX.equalToSuperview()
-      
-      switch height {
-      case 480.0: //Iphone 3,4S => 3.5 inch
-        $0.top.equalToSuperview().offset(11)
-      case 568.0: //iphone 5, SE => 4 inch
-        $0.top.equalToSuperview().offset(12)
-      case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
-        $0.top.equalToSuperview().offset(14)
-      case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
-        $0.top.equalToSuperview().offset(16)
-      case 812.0: //iphone X, XS => 5.8 inch
-        $0.top.equalToSuperview().offset(18)
-      case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
-        $0.top.equalToSuperview().offset(20)
-      default:
-        $0.top.equalToSuperview().offset(20)
-      }
+      $0.centerX.equalTo(todayLabelView)
+      $0.top.equalTo(todayLabelView.snp.centerY).offset(15)
     }
-    
-    countLabel.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
-      $0.centerY.equalToSuperview().offset(-15)
-    }
-    
-    upCountButton.snp.makeConstraints {
-      $0.leading.equalTo(view.snp.centerX).offset(20)
-      $0.trailing.equalToSuperview().offset(-40)
-      $0.bottom.equalToSuperview().offset(-30)
-      $0.height.equalToSuperview().multipliedBy(0.2)
-    }
-    
-    downCountButton.snp.makeConstraints {
-      $0.trailing.equalTo(view.snp.centerX).offset(-20)
-      $0.leading.equalToSuperview().offset(40)
-      $0.bottom.equalToSuperview().offset(-30)
-      $0.height.equalToSuperview().multipliedBy(0.2)
-    }
+
+        
 
   }
   
@@ -295,114 +364,70 @@ class TimerViewController: UIViewController {
 extension TimerViewController {
   func timerTextSetUp() {
     [dayLabel, hourLabel, minuteLabel, secondLabel].forEach({
-      $0.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(24))
-      $0.textColor = UIColor(named: "SmallFontColor")
+      $0.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(32))
+      $0.textColor = UIColor(named: "CountLabelColor")
       $0.textAlignment = .left
-      
-      $0.layer.shadowOffset = CGSize(width: 1, height: 1)
-      $0.layer.shadowOpacity = 1
-      $0.layer.shadowRadius = 0
-      $0.layer.shadowColor = UIColor(named: "SmallFontBackColor")?.cgColor
     })
   }
   
   func weekAvgLabelTextSetup(_ label: UILabel) {
-    label.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: dynamicFontSize(50))
-    label.textColor = UIColor(named: "SmallFontColor")
+    label.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(44))
+    label.textColor = UIColor(named: "CountLabelColor")
     label.textAlignment = .left
-    
-    label.layer.shadowOffset = CGSize(width: 1, height: 1)
-    label.layer.shadowOpacity = 1
-    label.layer.shadowRadius = 0
-    label.layer.shadowColor = UIColor(named: "SmallFontBackColor")?.cgColor
   }
   
   func weekAvgTitleLabelTextSetup(_ label: UILabel) {
-    label.text = "Last Week\nAverage :"
+    label.text = "7days AVG."
     label.numberOfLines = 2
-    label.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(24))
-    label.textColor = UIColor(named: "SmallFontColor")
+    label.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(22))
+    label.textColor = UIColor(named: "todaycountColor")
     label.textAlignment = .left
-    
-    label.layer.shadowOffset = CGSize(width: 1, height: 1)
-    label.layer.shadowOpacity = 1
-    label.layer.shadowRadius = 0
-    label.layer.shadowColor = UIColor(named: "SmallFontBackColor")?.cgColor
   }
   
-  func cigaretteNameLabelTextSetup(_ label: UILabel) {
-    let attributedString = NSMutableAttributedString(string: "BOHAM CIGAR -\nSlim Fit White", attributes: [
-      .font: UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(38))!,
-      .foregroundColor: UIColor(red: 206.0 / 255.0, green: 75.0 / 255.0, blue: 70.0 / 255.0, alpha: 1.0)
-    ])
-    attributedString.addAttribute(.font, value: UIFont(name: "NotoSans-BoldItalic", size: dynamicFontSize(38))!, range: NSRange(location: 14, length: 14))
-    
-    label.attributedText = attributedString
+  func last7DayLabelTextSetup(_ label: UILabel) {
+    label.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(44))
+    label.textColor = UIColor(named: "CountLabelColor")
+    label.textAlignment = .left
+  }
+  
+  func last7DayTitleLabelTextSetup(_ label: UILabel) {
+    label.text = "Last 7days"
     label.numberOfLines = 2
-    
-    label.layer.shadowOffset = CGSize(width: 3, height: 3)
-    label.layer.shadowOpacity = 1
-    label.layer.shadowRadius = 0
-    label.layer.shadowColor = UIColor(named: "NameBackColor")?.cgColor
+    label.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(22))
+    label.textColor = UIColor(named: "todaycountColor")
+    label.textAlignment = .left
   }
   
   func lastCigaretteLabelTextSetup(_ label: UILabel) {
-    label.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(24))
-    label.textColor = UIColor(named: "SmallFontColor")
+    label.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(24))
+    label.textColor = UIColor(named: "todaycountColor")
     label.textAlignment = .left
-    
-    label.layer.shadowOffset = CGSize(width: 1, height: 1)
-    label.layer.shadowOpacity = 1
-    label.layer.shadowRadius = 0
-    label.layer.shadowColor = UIColor(named: "SmallFontBackColor")?.cgColor
     label.dynamicFont(fontSize: label.font.pointSize)
   }
   
   func todayCountTitleLabelSetup(_ label: UILabel) {
-    label.text = "Today Count"
-    label.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(44))
-    label.textColor = UIColor.black
+    label.text = "Today"
+    label.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(30))
+    label.textColor = UIColor(named: "todaycountColor")
     label.textAlignment = .center
-    
-    label.layer.shadowOffset = CGSize(width: 5, height: 5)
-    label.layer.shadowOpacity = 1
-    label.layer.shadowRadius = 0
-    label.layer.shadowColor = UIColor.cherryRed16.cgColor
   }
   
   func countLabelTextSetup(_ label: UILabel) {
-    label.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: dynamicFontSize(114))
+    label.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(74))
     label.textColor = UIColor(named: "CountLabelColor")
     label.textAlignment = .left
-    
-    label.layer.shadowOffset = CGSize(width: 5, height: 5)
-    label.layer.shadowOpacity = 0.9
-    label.layer.shadowRadius = 0
-    label.layer.shadowColor = UIColor(named: "CountLabelBackColor")?.cgColor
   }
   
   func upCountButtonSetup(_ button: UIButton) {
     button.setTitle("Up", for: .normal)
-    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(44))
-    button.backgroundColor = UIColor.apple
-    
-    button.layer.cornerRadius = 10
-    button.layer.shadowOffset = CGSize(width: 3, height: 3)
-    button.layer.shadowOpacity = 0.46
-    button.layer.shadowRadius = 0
-    button.layer.shadowColor = UIColor.black.cgColor
+    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(28))
+    button.backgroundColor = UIColor(named: "grayBackgroundColor")
   }
   
   func downCountButtonSetup(_ button: UIButton) {
     button.setTitle("Down", for: .normal)
-    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(44))
-    button.backgroundColor = UIColor.coral
-    
-    button.layer.cornerRadius = 10
-    button.layer.shadowOffset = CGSize(width: 3, height: 3)
-    button.layer.shadowOpacity = 0.46
-    button.layer.shadowRadius = 0
-    button.layer.shadowColor = UIColor.black.cgColor
+    button.titleLabel?.font = UIFont(name: "NotoSans-ExtraBold", size: dynamicFontSize(28))
+    button.backgroundColor = UIColor(named: "grayBackgroundColor")
   }
   
   func dynamicFontSize(_ size: CGFloat) -> CGFloat {
@@ -488,7 +513,7 @@ extension UILabel {
   
   private func resizeFont(calculatedFont: UIFont?) {
     self.font = calculatedFont
-    self.font = UIFont(name: "NotoSans-ExtraBold", size: calculatedFont!.pointSize)
+    self.font = UIFont(name: "NotoSans-Regular", size: calculatedFont!.pointSize)
   }
   
   func dynamicFontItalic(fontSize size: CGFloat) {
@@ -532,4 +557,70 @@ extension UILabel {
     self.font = calculatedFont
     self.font = UIFont(name: "NotoSans-ExtraBoldItalic", size: calculatedFont!.pointSize)
   }
+}
+
+extension UIButton {
+
+func dynamicFont(fontSize size: CGFloat) {
+  let currentFontName = self.titleLabel?.font.fontName
+  var calculatedFont: UIFont?
+  let bounds = UIScreen.main.bounds
+  let height = bounds.size.height
+  
+  switch height {
+  case 480.0: //Iphone 3,4S => 3.5 inch
+    calculatedFont = UIFont(name: currentFontName!, size: size * 0.7)
+    resizeFont(calculatedFont: calculatedFont)
+    break
+  case 568.0: //iphone 5, SE => 4 inch
+    calculatedFont = UIFont(name: currentFontName!, size: size * 0.8)
+    resizeFont(calculatedFont: calculatedFont)
+    break
+  case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+    calculatedFont = UIFont(name: currentFontName!, size: size * 0.92)
+    resizeFont(calculatedFont: calculatedFont)
+    break
+  case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+    calculatedFont = UIFont(name: currentFontName!, size: size * 0.95)
+    resizeFont(calculatedFont: calculatedFont)
+    break
+  case 812.0: //iphone X, XS => 5.8 inch
+    calculatedFont = UIFont(name: currentFontName!, size: size)
+    resizeFont(calculatedFont: calculatedFont)
+    break
+  case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+    calculatedFont = UIFont(name: currentFontName!, size: size * 1.15)
+    resizeFont(calculatedFont: calculatedFont)
+    break
+  default:
+    print("not an iPhone")
+    break
+  }
+}
+  
+  private func resizeFont(calculatedFont: UIFont?) {
+    self.titleLabel?.font = calculatedFont!
+    self.titleLabel?.font = UIFont(name: "NotoSans-Light", size: calculatedFont!.pointSize)!
+  }
+}
+
+private func dynamicHeight(_ height: Float) -> Float {
+        switch height {
+        case 480.0: //Iphone 3,4S => 3.5 inch
+          return height * 0.7
+        case 568.0: //iphone 5, SE => 4 inch
+          return height * 0.8
+        case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+          return height * 0.92
+        case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+          return height * 0.95
+        case 812.0: //iphone X, XS => 5.8 inch
+          return height
+        case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+          return height * 1.15
+        default:
+          print("not an iPhone")
+          break
+        }
+  return height
 }

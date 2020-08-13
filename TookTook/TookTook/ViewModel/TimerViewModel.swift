@@ -23,6 +23,7 @@ struct TimerViewModel: Stepper, ViewModel {
   var timerData = BehaviorSubject<TimeModel>(value: TimeModel())
   var stopWatch = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
   var weeklyAverage = BehaviorSubject<Int>(value: 0)
+  var weeklyAllCount = BehaviorSubject<Int>(value: 0)
   
   func timerStart() {
     stopWatch
@@ -57,7 +58,11 @@ struct TimerViewModel: Stepper, ViewModel {
       print(#function, avg)
       self.weeklyAverage.onNext(avg)
     }
+    APIManager().getWeekAllCounts { count in
+      self.weeklyAllCount.onNext(count)
+    }
   }
+  
   
   private func timeModelSelfCycle(oldTime: TimeModel) -> TimeModel {
     
