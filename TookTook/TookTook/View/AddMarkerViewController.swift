@@ -105,7 +105,6 @@ class AddMarkerViewController: UIViewController {
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    
   }
   
   override func viewDidLayoutSubviews() {

@@ -75,6 +75,7 @@
 		15A8279424DDA36100E8DFDA /* AddMarkerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8279324DDA36100E8DFDA /* AddMarkerViewController.swift */; };
 		15A8279624DDA38C00E8DFDA /* AddMarkerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8279524DDA38C00E8DFDA /* AddMarkerViewModel.swift */; };
 		15A8279924DDB5B400E8DFDA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A8279824DDB5B400E8DFDA /* Extensions.swift */; };
+		15CC07D224F0C16700C79910 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CC07D124F0C16700C79910 /* SettingViewController.swift */; };
 		976270FE85A4C46062677999 /* Pods_TookTookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */; };
 		A7E679856D33087FACE8CCE8 /* Pods_TookTook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D23E8166C1AF79D01712960 /* Pods_TookTook.framework */; };
 /* End PBXBuildFile section */
@@ -149,6 +150,7 @@
 		15A8279324DDA36100E8DFDA /* AddMarkerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerViewController.swift; sourceTree = "<group>"; };
 		15A8279524DDA38C00E8DFDA /* AddMarkerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerViewModel.swift; sourceTree = "<group>"; };
 		15A8279824DDB5B400E8DFDA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		15CC07D124F0C16700C79910 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		1D8E509CAA705748C44B652F /* Pods_TookTookTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TookTookTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B2E839F04F6E55A200D42AD /* Pods-TookTook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTook.release.xcconfig"; path = "Target Support Files/Pods-TookTook/Pods-TookTook.release.xcconfig"; sourceTree = "<group>"; };
 		63A92BBD24FD92EA0D328D2B /* Pods-TookTookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TookTookTests.debug.xcconfig"; path = "Target Support Files/Pods-TookTookTests/Pods-TookTookTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				1532A68E24BF6F9B00DCD4C5 /* TImerViewController.swift */,
 				1532A6CB24BF7BFA00DCD4C5 /* LoginViewController.swift */,
 				15A8279324DDA36100E8DFDA /* AddMarkerViewController.swift */,
+				15CC07D124F0C16700C79910 /* SettingViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 				1532A73A24C0693000DCD4C5 /* AppState.swift in Sources */,
 				1532A68B24BF6F9B00DCD4C5 /* AppDelegate.swift in Sources */,
 				1532A73E24C06ADE00DCD4C5 /* LoginViewModel.swift in Sources */,
+				15CC07D224F0C16700C79910 /* SettingViewController.swift in Sources */,
 				15A8279624DDA38C00E8DFDA /* AddMarkerViewModel.swift in Sources */,
 				1532A6C624BF791800DCD4C5 /* MainService.swift in Sources */,
 				1532A6C424BF78CE00DCD4C5 /* RootFlow.swift in Sources */,
