@@ -1,4 +1,4 @@
-# Took Took
+# Took Took 리팩토링
 
 패스트 캠퍼스 iOS School에서 진행했던 3차 해커톤 프로젝트를 RxSwift, MVVM-C 디자인 패턴을 사용해 리팩토링한 앱입니다. (기존 앱 레포 https://github.com/wanderingfairy/SmokerMap )
 
