@@ -19,6 +19,9 @@ import CoreData
 import Tapa
 import Firebase
 import FirebaseAuth
+import GoogleMaps
+import GooglePlaces
+import SkeletonView
 
 #if DEBUG
 import Gedatsu
@@ -44,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     FirebaseApp.configure()
     
     window = UIWindow(frame: UIScreen.main.bounds)
+    
+    // MARK: - init GoogleMaps
+    GMSServices.provideAPIKey("AIzaSyCDjp0Ngg-KXturg0zjfkoCOYh9yT98unU")
+    GMSPlacesClient.provideAPIKey("AIzaSyCDjp0Ngg-KXturg0zjfkoCOYh9yT98unU")
     
     // MARK: - login Check
     if Auth.auth().currentUser == nil {

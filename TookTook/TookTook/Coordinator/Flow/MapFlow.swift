@@ -8,6 +8,7 @@
 
 import UIKit
 import RxFlow
+import GoogleMaps
 
 class MapFlow: Flow {
   
@@ -32,6 +33,8 @@ class MapFlow: Flow {
       return mapCheck()
     case .loginIsRequired:
       return navigateToLoginVC()
+    case .navigateToAddMarkerVC(mapViewModel: let vm, mapView: let mapView):
+      return navigateToAddMarkerVC(viewModel: vm, mapView: mapView)
     case .back:
       return back()
     default:
@@ -61,6 +64,15 @@ extension MapFlow {
     vc.viewModel = LoginViewModel()
     print(#function)
     self.mapNavigationController.pushViewController(vc, animated: true)
+    return .one(flowContributor: .contribute(withNextPresentable: vc, withNextStepper: vc.viewModel))
+  }
+  
+  private func navigateToAddMarkerVC(viewModel: MapViewModel, mapView: GMSMapView) -> FlowContributors {
+    let vc = AddMarkerViewController()
+    vc.title = "Add"
+    vc.viewModel = viewModel
+    vc.mapView = mapView
+    self.mapNavigationController.present(vc, animated: true, completion: nil)
     return .one(flowContributor: .contribute(withNextPresentable: vc, withNextStepper: vc.viewModel))
   }
   

@@ -20,15 +20,13 @@ class LoginViewController: UIViewController{
   
   let appNameLabel = UILabel()
   let subtitleLabel = UILabel()
-  
-  let loginBGImageView = UIImageView()
   let appleLoginView = UIView()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .lightGray
-    print("ddd")
+    view.backgroundColor = UIColor(named: "grayBackgroundColor")
+    print("LoginVC viewdidloaded")
     setupUI()
     
     
@@ -38,45 +36,38 @@ class LoginViewController: UIViewController{
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     AppModel.instance.loginVCStart()
+    self.tabBarController?.tabBar.isHidden = true
   }
   
   private func setupUI() {
     
-    view.addSubview(loginBGImageView)
-    
     appNameLabel.text = "Took Took"
-    appNameLabel.font = UIFont.systemFont(ofSize: 50, weight: .medium)
+    appNameLabel.font = UIFont(name: "NotoSans-Medium", size: dynamicFontSize(64))
     
-    subtitleLabel.text = "If you're looking for\na place to smoke,\nplease log in"
+    subtitleLabel.text = "Find smoking zones,\nCheck your smoking habits"
     subtitleLabel.textAlignment = .center
     subtitleLabel.numberOfLines = 0
-    subtitleLabel.font = UIFont.systemFont(ofSize: 32, weight: .medium)
+    subtitleLabel.font = UIFont(name: "NotoSans-Regular", size: dynamicFontSize(28))
     
     view.addSubview(appNameLabel)
     view.addSubview(subtitleLabel)
-    
-    loginBGImageView.image = UIImage(named: "LoginBG")
-    loginBGImageView.contentMode = .scaleAspectFill
     view.addSubview(appleLoginView)
     setupConstraints()
     addButtton()
   }
   private func setupConstraints() {
-    loginBGImageView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
-      
-    }
     
     appNameLabel.snp.makeConstraints {
-      $0.centerY.equalToSuperview().multipliedBy(0.2)
+      $0.centerY.equalToSuperview().multipliedBy(0.3)
       $0.centerX.equalToSuperview()
     }
     subtitleLabel.snp.makeConstraints {
-      $0.center.equalToSuperview()
+      $0.centerY.equalToSuperview().multipliedBy(0.6)
+      $0.centerX.equalToSuperview()
     }
     
     appleLoginView.snp.makeConstraints {
-      $0.centerY.equalToSuperview().multipliedBy(1.5)
+      $0.centerY.equalToSuperview().multipliedBy(1.2)
       $0.centerX.equalToSuperview()
       $0.width.equalToSuperview().multipliedBy(0.7)
       $0.height.equalToSuperview().multipliedBy(0.07)
@@ -206,5 +197,27 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
   func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
     // Handle error.
     print("Sign in with Apple errored: \(error)")
+  }
+}
+
+func dynamicFontSize(_ size: CGFloat) -> CGFloat {
+  let bounds = UIScreen.main.bounds
+  let height = bounds.size.height
+  
+  switch height {
+  case 480.0: //Iphone 3,4S => 3.5 inch
+    return size * 0.535
+  case 568.0: //iphone 5, SE => 4 inch
+    return size * 0.74
+  case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
+    return size * 0.92
+  case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
+    return size * 0.82
+  case 812.0: //iphone X, XS => 5.8 inch
+    return size * 0.9
+  case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
+    return size
+  default:
+    return size
   }
 }

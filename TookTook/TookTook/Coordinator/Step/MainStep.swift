@@ -8,6 +8,7 @@
 
 import Foundation
 import RxFlow
+import GoogleMaps
 
 enum MainStep: Step {
   // Global
@@ -28,4 +29,7 @@ enum MainStep: Step {
   
   // For back
   case back
+  
+  // For MapVC
+  case navigateToAddMarkerVC(mapViewModel: MapViewModel, mapView: GMSMapView)
 }

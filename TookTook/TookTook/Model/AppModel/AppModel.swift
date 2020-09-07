@@ -20,12 +20,21 @@ class AppModel {
     appState = .inMapVC
     dataModel.start()
   }
+  func inMapVC() {
+    appState = .inMapVC
+  }
   
   func timerVCStart() {
     appState = .inTimerVC
   }
+  func inTimerVC() {
+    appState = .inTimerVC
+  }
   func loginVCStart() {
     appState = .inLoginVC
+  }
+  func inAddMarkerVC() {
+    appState = .inAddMarkerVC
   }
   
   //AuthFlow
@@ -36,4 +45,8 @@ class AppModel {
     authState = .userLoggedIn
     UserModel.instance.settingUID(withUID: uid)
   }
+  
+  
+  
+  // Map Flow
 }

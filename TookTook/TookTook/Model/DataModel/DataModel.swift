@@ -10,11 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import CoreLocation
+import GoogleMaps
 
 struct DataModel {
   
   var todayCount = BehaviorSubject<Int>(value: 0)
   var inServerCount = BehaviorSubject<Int>(value: 0)
+  var markers = PublishSubject<[GMSMarker]>()
   
   var bag = DisposeBag()
   

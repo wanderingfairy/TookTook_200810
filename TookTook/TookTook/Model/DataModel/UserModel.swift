@@ -12,6 +12,7 @@ import FirebaseAuth
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import CoreLocation
 
 class UserModel {
   
@@ -20,7 +21,6 @@ class UserModel {
   private let bag = DisposeBag()
   
   private let firebaseUID = BehaviorSubject<String?>(value: nil)
-  
   
   func settingUID(withUID uid: String) {
     firebaseUID.onNext(uid)
