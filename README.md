@@ -34,21 +34,13 @@
 
 ## Feature
 
-- Apple Login
+| Apple Login                                                  | Google Map                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9nogc58j30ke13qdnm.jpg" alt="스크린샷 2020-08-13 오후 4.21.23" style="zoom:50%;" /> | <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9oac146j30kg14mqmj.jpg" alt="스크린샷 2020-08-13 오후 4.24.23" style="zoom:50%;" /> |
+| Add Smoking zone                                             | Smoking Timer                                                |
+| <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9oo31o0j30kc14qwr9.jpg" alt="스크린샷 2020-08-13 오후 4.24.48" style="zoom:50%;" /> | <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9p43fwbj30ke14k7f1.jpg" alt="스크린샷 2020-08-13 오후 4.24.59" style="zoom:50%;" /> |
 
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9nogc58j30ke13qdnm.jpg" alt="스크린샷 2020-08-13 오후 4.21.23" style="zoom:50%;" />
 
-- Google Map
-
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9oac146j30kg14mqmj.jpg" alt="스크린샷 2020-08-13 오후 4.24.23" style="zoom:50%;" />
-
-- Add Smoking zone
-
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9oo31o0j30kc14qwr9.jpg" alt="스크린샷 2020-08-13 오후 4.24.48" style="zoom:50%;" />
-
-- Smoking Timer
-
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gii9p43fwbj30ke14k7f1.jpg" alt="스크린샷 2020-08-13 오후 4.24.59" style="zoom:50%;" />
 
 ---
 
