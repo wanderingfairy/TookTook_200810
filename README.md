@@ -22,7 +22,7 @@
 
 ## Video Link(Youtube)
 
-## https://youtu.be/d-w3wNaNFSI
+## https://youtu.be/EAoQxd8BNH0
 
 ## Design Concept
 
